@@ -1,0 +1,79 @@
+{
+  "name": "markdowndoc",
+  "version": "0.0.0",
+  "description": "A documentation tool for Markdown.",
+  "author": {
+    "name": "Daniel Bannert",
+    "email": "d.bannert@anolilab.de"
+  },
+  "homepage": "https://github.com/MarkdownDoc/markdowndocs",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarkdownDoc/markdowndocs.git"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "grunt test -v --stack -d"
+  },
+  "bugs": {
+    "url": "https://github.com/MarkdownDoc/markdowndocs/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "bower": "~1.5.2",
+    "chai": "^3.2.0",
+    "grunt": "^0.4.5",
+    "grunt-babel": "^5.0.1",
+    "grunt-bump": "^0.5.0",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jscs": "^2.1.0",
+    "grunt-jsonlint": "^1.0.4",
+    "grunt-mocha-cli": "^1.14.0",
+    "grunt-newer": "^1.1.1",
+    "jshint-stylish": "^2.0.1",
+    "load-grunt-config": "^0.17.2",
+    "load-grunt-tasks": "^3.2.0",
+    "time-grunt": "^1.2.1"
+  },
+  "keywords": [
+    "grunt",
+    "bower",
+    "bin",
+    "front-end",
+    "development",
+    "dev",
+    "build",
+    "generator",
+    "generate",
+    "tool"
+  ],
+  "dependencies": {
+    "babel-runtime": "^5.8.20",
+    "chalk": "^1.1.1",
+    "config-file": "^0.3.1",
+    "docopt": "^0.6.2",
+    "fs-extra": "^0.24.0",
+    "highlight.js": "^8.8.0",
+    "html-minifier": "^0.7.2",
+    "log": "^1.4.0",
+    "markdown-it": "^4.4.0",
+    "markdown-it-checkbox": "^1.1.0",
+    "markdown-it-linkscheme": "^1.0.2",
+    "markdown-it-responsive": "^0.1.0",
+    "markdowndoc-theme-default": "0.0.2",
+    "minimatch": "^2.0.10",
+    "read-file": "^0.2.0",
+    "set-value": "^0.2.0",
+    "update-notifier": "^0.5.0"
+  }
+}

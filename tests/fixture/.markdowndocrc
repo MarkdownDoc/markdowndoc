@@ -1,0 +1,17 @@
+{
+  "style"     : "single",
+  "html"      : false,
+  "xhtmlOut"  : false,
+  "breaks"    : false,
+  "langPrefix": "lang-",
+  "linkify"   : true,
+  "typography": true,
+  "dest"      : "",
+  "theme"     : "default",
+  "plugins"   : {
+    "highlight"       : true,
+    "linkscheme"      : true,
+    "responsiveimage": true,
+    "checkbox"        : true
+  }
+}

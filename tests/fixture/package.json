@@ -1,0 +1,17 @@
+{
+  "markdowndoc": {
+    "html"      : true,
+    "xhtmlOut"  : false,
+    "breaks"    : true,
+    "langPrefix": "lang-",
+    "linkify"   : true,
+    "typography": true,
+    "style"     : "single",
+    "plugins"   : {
+      "highlight"       : true,
+      "linkscheme"      : true,
+      "responsiveimage": true,
+      "checkbox"        : true
+    }
+  }
+}
