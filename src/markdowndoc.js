@@ -56,7 +56,7 @@ export function createDataTree (env, done) {
     function (err, res) {
 
       if (err) {
-        console.error(err);
+        env.log(new errors.MarkdownDocError(err), 'error');
       }
 
       if (typeof done === 'function') {

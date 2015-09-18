@@ -70,7 +70,7 @@
     "markdown-it-checkbox": "^1.1.0",
     "markdown-it-linkscheme": "^1.0.2",
     "markdown-it-responsive": "^0.1.0",
-    "markdowndoc-theme-default": "^0.0.3",
+    "markdowndoc-theme-default": "^0.1.0",
     "minimatch": "^2.0.10",
     "read-file": "^0.2.0",
     "set-value": "^0.2.0",
