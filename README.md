@@ -8,7 +8,7 @@
 [![Build Status](https://img.shields.io/travis/MarkdownDoc/markdowndoc/master.svg?style=flat-square)](https://travis-ci.org/MarkdownDoc/markdowndoc)
 
 ## Develop
-[![Build Status](https://img.shields.io/travis/MarkdownDoc/markdowndoc/master.svg?style=flat-square)](https://travis-ci.org/MarkdownDoc/markdowndoc)
+[![Build Status](https://img.shields.io/travis/MarkdownDoc/markdowndoc/develop.svg?style=flat-square)](https://travis-ci.org/MarkdownDoc/markdowndoc)
 
 ### Bits and Pieces:
 * [npm:](https://npmjs.org/) Well... it's a Node.js package manager
