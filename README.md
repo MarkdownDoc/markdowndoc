@@ -20,7 +20,7 @@
 ## Getting Started:
 
 1. You need to have npm installed (it comes with node)
-2. Clone this repository: `git clone git@github.com:anolilab/skeljs.git`
+2. Clone this repository: `git clone git@github.com:MarkdownDoc/markdowndoc.git`
 3. Install dependencies: `npm install`
 
 ## Install
