@@ -31,6 +31,19 @@ export function denodeify(fn) {
   };
 }
 
+export const is = {
+  undef: arg => arg === void 0,
+  string: arg => typeof arg === 'string',
+  function: arg => typeof arg === 'function',
+  object: arg => typeof arg === 'object' && arg !== null,
+  plainObject: arg => toString(arg) === '[object Object]',
+  array: arg => Array.isArray(arg),
+  error: arg => is.object(arg) &&
+    (toString(arg) === '[object Error]' || arg instanceof Error),
+  promise: arg => arg && is.function(arg.then),
+  stream: arg => arg && is.function(arg.pipe)
+};
+
 /**
  * Filter files in array on regex.
  *
@@ -74,7 +87,7 @@ export function merge (target, src) {
   if (target && is.object(target)) {
     Object.keys(target).forEach(function (key) {
       dst[key] = target[key];
-    })
+    });
   }
 
   Object.keys(src).forEach(function (key) {
@@ -108,16 +121,3 @@ export function getFirstMatch(string, regex, index = 1) {
 
   return matches ? matches[index] : '';
 }
-
-export const is = {
-  undef: arg => arg === void 0,
-  string: arg => typeof arg === 'string',
-  function: arg => typeof arg === 'function',
-  object: arg => typeof arg === 'object' && arg !== null,
-  plainObject: arg => toString(arg) === '[object Object]',
-  array: arg => Array.isArray(arg),
-  error: arg => is.object(arg) &&
-    (toString(arg) === '[object Error]' || arg instanceof Error),
-  promise: arg => arg && is.function(arg.then),
-  stream: arg => arg && is.function(arg.pipe)
-};

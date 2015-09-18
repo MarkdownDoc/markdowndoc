@@ -10,7 +10,7 @@ var path        = require('path');
 describe('#environment', function () {
   it('should load look for .markdowndocrc or load default config if no path is set', function () {
     var expected = {
-      'name'        : 'MarkdownDoc',
+      'name'        : 'markdowndoc',
       'version'     : '0.0.0',
       'description' : 'A documentation tool for Markdown.',
       'debug'       : false,
@@ -46,7 +46,7 @@ describe('#environment', function () {
   describe('#load-default-config', function () {
     it('should render the default config', function () {
       var expected = {
-        'name'        : 'MarkdownDoc',
+        'name'        : 'markdowndoc',
         'version'     : '0.0.0',
         'description' : 'A documentation tool for Markdown.',
         'debug'       : false,
@@ -83,7 +83,7 @@ describe('#environment', function () {
   describe('#package-load', function () {
     it('should render the package config', function () {
       var expected = {
-        'name'       : 'MarkdownDoc',
+        'name'       : 'markdowndoc',
         'version'    : '0.0.0',
         'description': 'A documentation tool for Markdown.',
         'debug'       : false,
@@ -122,7 +122,7 @@ describe('#environment', function () {
     it('should warn if package file is not found and load CWD package.json', function () {
       var env = new Environment('should/fail.json');
 
-      assert.ok(env.parsedConf.name === 'MarkdownDoc');
+      assert.ok(env.parsedConf.name === 'markdowndoc');
       // assert.notEqual(-1, warnings[0].indexOf('should/fail.json` not found'));
       // assert.notEqual(-1, warnings[1].indexOf('Falling back to `package.json`'));
     });
