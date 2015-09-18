@@ -4,7 +4,7 @@
 [![GitHub release](https://img.shields.io/github/release/MarkdownDoc/markdowndoc.svg?style=flat-square)](https://github.com/MarkdownDoc/markdowndoc/releases)
 [![Dependency Status](https://david-dm.org/MarkdownDoc/markdowndoc.svg?style=flat-square)](https://david-dm.org/MarkdownDoc/markdowndoc#info=dependencies&view=table)
 [![devDependency Status](https://david-dm.org/MarkdownDoc/markdowndoc/dev-status.svg?style=flat-square)](https://david-dm.org/MarkdownDoc/markdowndoc#info=devDependencies)
-[![Software License](https://img.shields.io/badge/license-:package_license-brightgreen.svg?style=flat-square)](LICENSE)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 ## Master
 [![Build Status](https://img.shields.io/travis/MarkdownDoc/markdowndoc/master.svg?style=flat-square)](https://travis-ci.org/MarkdownDoc/markdowndoc)
