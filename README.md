@@ -1,6 +1,8 @@
-# MarkdownDocs
+# markdowndoc
 
-[![npm](https://img.shields.io/npm/v/MarkdownDocs.svg?style=flat-square)](https://www.npmjs.com/package/MarkdownDocs)
+[![npm](https://img.shields.io/npm/v/markdowndoc.svg?style=flat-square)](https://www.npmjs.com/package/markdowndoc)
+[![GitHub release](https://img.shields.io/github/release/MarkdownDoc/markdowndoc.svg?style=flat-square)](https://github.com/MarkdownDoc/markdowndoc/releases)
+[![Dependency Status](https://david-dm.org/MarkdownDoc/markdowndoc.svg?style=flat-square)](https://david-dm.org/MarkdownDoc/markdowndoc#info=dependencies&view=table)
 [![devDependency Status](https://david-dm.org/MarkdownDoc/markdowndoc/dev-status.svg?style=flat-square)](https://david-dm.org/MarkdownDoc/markdowndoc#info=devDependencies)
 [![Software License](https://img.shields.io/badge/license-:package_license-brightgreen.svg?style=flat-square)](LICENSE)
 
