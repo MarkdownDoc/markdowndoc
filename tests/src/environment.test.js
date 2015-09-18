@@ -10,13 +10,14 @@ var path        = require('path');
 describe('#environment', function () {
   it('should load look for .markdowndocrc or load default config if no path is set', function () {
     var expected = {
-      'name'        : 'markdowndoc',
-      'version'     : '0.0.0',
-      'description' : 'A documentation tool for Markdown.',
-      'debug'       : false,
-      'style'       : 'single',
-      'intern'      : {
-        'file-type': '.md',
+      'name'       : 'markdowndoc',
+      'version'    : '0.0.0',
+      'description': 'A documentation tool for Markdown.',
+      'debug'      : false,
+      'style'      : 'single',
+      'file-type'  : '.md',
+      'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
+      'intern'     : {
         'html'        : false,
         'xhtmlOut'    : false,
         'breaks'      : false,
@@ -24,7 +25,6 @@ describe('#environment', function () {
         'linkify'     : true,
         'typography'  : true,
         'dest'        : 'markdowndoc',
-        'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
         'theme'       : 'default',
         'noUpdateNotifier': true,
         'plugins'     : {
@@ -46,13 +46,14 @@ describe('#environment', function () {
   describe('#load-default-config', function () {
     it('should render the default config', function () {
       var expected = {
-        'name'        : 'markdowndoc',
-        'version'     : '0.0.0',
-        'description' : 'A documentation tool for Markdown.',
-        'debug'       : false,
-        'style'       : 'multisite',
-        'intern'      : {
-          'file-type': '.md',
+        'name'       : 'markdowndoc',
+        'version'    : '0.0.0',
+        'description': 'A documentation tool for Markdown.',
+        'debug'      : false,
+        'style'      : 'multisite',
+        'file-type'  : '.md',
+        'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
+        'intern'     : {
           'html'        : false,
           'xhtmlOut'    : false,
           'breaks'      : false,
@@ -60,7 +61,6 @@ describe('#environment', function () {
           'linkify'     : true,
           'typography'  : true,
           'dest'        : 'markdowndoc',
-          'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
           'theme'       : 'default',
           'noUpdateNotifier': true,
           'plugins'     : {
@@ -86,10 +86,11 @@ describe('#environment', function () {
         'name'       : 'markdowndoc',
         'version'    : '0.0.0',
         'description': 'A documentation tool for Markdown.',
-        'debug'       : false,
-        'style'       : 'single',
-        'intern'      : {
-          'file-type': '.md',
+        'debug'      : false,
+        'style'      : 'single',
+        'file-type'  : '.md',
+        'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
+        'intern'     : {
           'html'        : true,
           'xhtmlOut'    : false,
           'breaks'      : true,
@@ -97,7 +98,6 @@ describe('#environment', function () {
           'linkify'     : true,
           'typography'  : true,
           'dest'        : 'markdowndoc',
-          'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
           'theme'       : 'default',
           'noUpdateNotifier': true,
           'plugins'     : {

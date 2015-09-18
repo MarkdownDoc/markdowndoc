@@ -78,7 +78,7 @@ export function addFileData (env, dirData) {
     let title = getFirstMatch(html, /<h1>(.*)<\/h1>/g);
     let fileName = path.basename(
       dirData.files[i].fileName,
-      env.get('intern.file-type')
+      env.get('file-type')
     );
 
     dirData.files[i].html = html;
@@ -131,12 +131,14 @@ export default function markdowndoc (config) {
    * @param  {Object} env
    */
   function createEmptyOutputDirectory (env) {
+    let dest = env.get('intern.dest');
+
     fsExtra.emptyDir(
-      env.get('intern.destAbsolute'),
+      env.get('destAbsolute'),
       function (err) {
         if (!err) {
           env.log(
-            `Folder \`${env.get('intern.dest')}\` successfully refreshed.`
+            `Folder \`${dest}\` successfully refreshed.`
           );
         }
       }
@@ -151,7 +153,7 @@ export default function markdowndoc (config) {
   function renderTheme (env) {
     let theme = resolve(env);
     let displayTheme = env.get('intern.displayTheme') || 'anonymous';
-    let dest = env.get('intern.destAbsolute');
+    let dest = env.get('destAbsolute');
 
     // Delete internal config, no need for the theme to know about it.
     delete env.parsedConf.intern;

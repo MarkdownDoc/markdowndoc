@@ -10,8 +10,8 @@ import setValue from 'set-value';
 let defaults = {
   'debug': false,
   'style': 'multisite',
+  'file-type': '.md',
   'intern': {
-    'file-type': '.md',
     'html': false,
     'xhtmlOut': false,
     'breaks': false,
@@ -163,8 +163,8 @@ export default class Environment extends EventEmitter {
   }
 
   checkIfDestIsSet (data) {
-    data.intern.dest         = data.dest ? data.dest : 'markdowndoc';
-    data.intern.destAbsolute = path.resolve(process.cwd(), data.intern.dest);
+    data.intern.dest  = data.dest ? data.dest : 'markdowndoc';
+    data.destAbsolute = path.resolve(process.cwd(), data.intern.dest);
 
     return data;
   }

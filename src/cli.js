@@ -89,13 +89,13 @@ export default function cli(argv = process.argv.slice(2)) {
 
   let env = new Environment(newConfig, modus);
 
-  env.on('error', error => {
-    if (error instanceof errors.Warning) {
-      process.exit(2);
-    }
+  // env.on('error', error => {
+  //   if (error instanceof errors.Warning) {
+  //     process.exit(2);
+  //   }
 
-    process.exit(1);
-  });
+  //   process.exit(1);
+  // });
 
   parseConfig(env, options);
 
