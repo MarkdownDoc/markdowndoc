@@ -2,7 +2,6 @@
 
 import path from 'path';
 import loadFile from 'config-file';
-import * as errors from './errors';
 import { is, merge } from './utils';
 import { EventEmitter } from 'events';
 import Logger from 'log';

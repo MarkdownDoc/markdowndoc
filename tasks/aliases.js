@@ -1,14 +1,14 @@
 module.exports = {
-  'dev:test' : [
+  'test' : [
     'newer:jsonlint:dev',
     'newer:jscs:dev',
-    // 'newer:jshint:dev',
+    'newer:jshint:dev',
     'babel:test',
     'mochacli'
   ],
   'default': [
     'clean',
-    'dev:test',
+    'test',
     'newer:babel:dist'
   ],
   'build': [
