@@ -4,12 +4,6 @@
    * =================
    */
 
-  // Define globals exposed by modern browsers.
-  "browser": true,
-
-  // Define globals exposed by jQuery.
-  "jquery": true,
-
   // Define globals exposed by Node.js.
   "node": true,
 
@@ -26,7 +20,7 @@
   "camelcase": true,
 
   // Prohibit use of == and != in favor of === and !==.
-  "eqeqeq": true,
+  "eqeqeq": false,
 
   // Enforce tab width of 2 spaces.
   "indent": 2,
@@ -44,7 +38,7 @@
   "quotmark": "single",
 
   // Enforce placing 'use strict' at the top function scope
-  "strict": true,
+  "strict": false,
 
   // Prohibit use of explicitly undeclared variables.
   "undef": true,

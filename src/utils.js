@@ -1,5 +1,3 @@
-'use strict';
-
 import fs from 'fs';
 import path from 'path';
 
@@ -17,7 +15,8 @@ const toString = arg => Object.prototype.toString.call(arg);
  * @return {Object}
  */
 export function denodeify(fn) {
-  return function (...args) {
+  return function(...args) {
+    /*eslint-disable */
     return new Promise((resolve, reject) => {
       fn(...args, (err, ...args) => {
         if (err) {
@@ -28,8 +27,22 @@ export function denodeify(fn) {
         resolve(...args);
       });
     });
+    /*eslint-enable */
   };
 }
+
+export const is = {
+  undef: arg => arg === void 0,
+  string: arg => typeof arg === 'string',
+  function: arg => typeof arg === 'function',
+  object: arg => typeof arg === 'object' && arg !== null,
+  plainObject: arg => toString(arg) === '[object Object]',
+  array: arg => Array.isArray(arg),
+  error: arg => is.object(arg) &&
+    (toString(arg) === '[object Error]' || arg instanceof Error),
+  promise: arg => arg && is.function(arg.then),
+  stream: arg => arg && is.function(arg.pipe),
+};
 
 /**
  * Filter files in array on regex.
@@ -40,15 +53,15 @@ export function denodeify(fn) {
  *
  * @return {Array}
  */
-export function filter (dir, array, regex = null) {
+export function filter(dir, array, regex = null) {
   if (regex === null) {
     return array;
   }
 
-  let newList = [];
+  const newList = [];
 
-  array.forEach(function (file) {
-    let filePath = fs.lstatSync(path.resolve(dir, file));
+  array.forEach(function(file) {
+    const filePath = fs.lstatSync(path.resolve(dir, file));
 
     if (filePath.isDirectory()) {
       newList.push(file);
@@ -68,16 +81,16 @@ export function filter (dir, array, regex = null) {
   *
   * @return {Object}
   */
-export function merge (target, src) {
-  let dst = {};
+export function merge(target, src) {
+  const dst = {};
 
   if (target && is.object(target)) {
-    Object.keys(target).forEach(function (key) {
+    Object.keys(target).forEach(function(key) {
       dst[key] = target[key];
-    })
+    });
   }
 
-  Object.keys(src).forEach(function (key) {
+  Object.keys(src).forEach(function(key) {
     if (!is.object(src[key]) || !src[key]) {
       dst[key] = src[key];
     } else {
@@ -108,16 +121,3 @@ export function getFirstMatch(string, regex, index = 1) {
 
   return matches ? matches[index] : '';
 }
-
-export const is = {
-  undef: arg => arg === void 0,
-  string: arg => typeof arg === 'string',
-  function: arg => typeof arg === 'function',
-  object: arg => typeof arg === 'object' && arg !== null,
-  plainObject: arg => toString(arg) === '[object Object]',
-  array: arg => Array.isArray(arg),
-  error: arg => is.object(arg) &&
-    (toString(arg) === '[object Error]' || arg instanceof Error),
-  promise: arg => arg && is.function(arg.then),
-  stream: arg => arg && is.function(arg.pipe)
-};

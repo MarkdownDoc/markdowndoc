@@ -7,7 +7,7 @@
     "email": "d.bannert@anolilab.de"
   },
   "homepage": "https://github.com/MarkdownDoc/markdowndocs",
-  "main": "library.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/MarkdownDoc/markdowndocs.git"
@@ -27,8 +27,11 @@
   },
   "devDependencies": {
     "babel": "^5.8.23",
+    "babel-eslint": "^4.1.3",
     "bower": "~1.5.2",
     "chai": "^3.2.0",
+    "eslint-config-airbnb": "0.0.8",
+    "eslint-plugin-react": "^3.4.2",
     "grunt": "^0.4.5",
     "grunt-babel": "^5.0.1",
     "grunt-bump": "^0.5.0",
@@ -36,6 +39,7 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^17.1.0",
     "grunt-jscs": "^2.1.0",
     "grunt-jsonlint": "^1.0.4",
     "grunt-mocha-cli": "^1.14.0",
@@ -63,16 +67,9 @@
     "config-file": "^0.3.1",
     "docopt": "^0.6.2",
     "fs-extra": "^0.24.0",
-    "highlight.js": "^8.8.0",
-    "html-minifier": "^0.7.2",
     "log": "^1.4.0",
-    "markdown-it": "^4.4.0",
-    "markdown-it-checkbox": "^1.1.0",
-    "markdown-it-linkscheme": "^1.0.2",
-    "markdown-it-responsive": "^0.1.0",
-    "markdowndoc-theme-default": "0.0.2",
-    "minimatch": "^2.0.10",
-    "read-file": "^0.2.0",
+    "markdowndoc-markdown-parser": "^0.1.1",
+    "markdowndoc-theme-default": "^0.1.0",
     "set-value": "^0.2.0",
     "update-notifier": "^0.5.0"
   }

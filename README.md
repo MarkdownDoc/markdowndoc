@@ -1,14 +1,16 @@
-# MarkdownDocs
+# markdowndoc
 
-[![npm](https://img.shields.io/npm/v/MarkdownDocs.svg?style=flat-square)](https://www.npmjs.com/package/MarkdownDocs)
+[![npm](https://img.shields.io/npm/v/markdowndoc.svg?style=flat-square)](https://www.npmjs.com/package/markdowndoc)
+[![GitHub release](https://img.shields.io/github/release/MarkdownDoc/markdowndoc.svg?style=flat-square)](https://github.com/MarkdownDoc/markdowndoc/releases)
+[![Dependency Status](https://david-dm.org/MarkdownDoc/markdowndoc.svg?style=flat-square)](https://david-dm.org/MarkdownDoc/markdowndoc#info=dependencies&view=table)
 [![devDependency Status](https://david-dm.org/MarkdownDoc/markdowndoc/dev-status.svg?style=flat-square)](https://david-dm.org/MarkdownDoc/markdowndoc#info=devDependencies)
-[![Software License](https://img.shields.io/badge/license-:package_license-brightgreen.svg?style=flat-square)](LICENSE)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 ## Master
 [![Build Status](https://img.shields.io/travis/MarkdownDoc/markdowndoc/master.svg?style=flat-square)](https://travis-ci.org/MarkdownDoc/markdowndoc)
 
 ## Develop
-[![Build Status](https://img.shields.io/travis/MarkdownDoc/markdowndoc/master.svg?style=flat-square)](https://travis-ci.org/MarkdownDoc/markdowndoc)
+[![Build Status](https://img.shields.io/travis/MarkdownDoc/markdowndoc/develop.svg?style=flat-square)](https://travis-ci.org/MarkdownDoc/markdowndoc)
 
 ### Bits and Pieces:
 * [npm:](https://npmjs.org/) Well... it's a Node.js package manager
@@ -18,7 +20,7 @@
 ## Getting Started:
 
 1. You need to have npm installed (it comes with node)
-2. Clone this repository: `git clone git@github.com:anolilab/skeljs.git`
+2. Clone this repository: `git clone git@github.com:MarkdownDoc/markdowndoc.git`
 3. Install dependencies: `npm install`
 
 ## Install

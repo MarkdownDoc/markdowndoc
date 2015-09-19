@@ -1,5 +1,3 @@
-'use strict';
-
 import path from 'path';
 import * as errors from './errors';
 
@@ -10,29 +8,26 @@ import * as errors from './errors';
  *
  * @return {Promise}
  */
-export default function resolve (env) {
+export default function resolve(env) {
   const logger = env.logger;
 
   /**
-   * Load given theme module.
+   * Try to find the default theme.
    *
-   * @param {String} env
+   * @return {String} default path theme.
    */
-  function load (env) {
-    let name  = env.get('intern.theme');
-    let theme = '';
-
-    if (name.indexOf('/') === -1) {
-      theme = getValidModuleName(`markdowndoc-theme-${name}`);
-    } else {
-      theme = path.resolve(process.cwd(), getValidModuleName(name));
+  function getDefaultTheme() {
+    try {
+      require.resolve('markdowndoc-theme-default');
+    } catch (err) {
+      logger.error(
+        new errors.MarkdownDocError(
+          'Holy shit, the default theme was not found! Run!'
+        )
+      );
     }
 
-    env.set('intern.displayTheme', path.relative(process.cwd(), theme));
-
-    env.log(`Given theme ${name} is loaded.`);
-
-    return getValidThemeFunction(theme);
+    return 'default';
   }
 
   /**
@@ -42,7 +37,7 @@ export default function resolve (env) {
    *
    * @return {String}
    */
-  function getValidModuleName (module) {
+  function getValidModuleName(module) {
     try {
       require.resolve(module);
     } catch (err) {
@@ -65,9 +60,9 @@ export default function resolve (env) {
    *
    * @return {Promise}
    */
-  function getValidThemeFunction (module) {
-    let theme = require(module);
-    let str   = Object.prototype.toString;
+  function getValidThemeFunction(module) {
+    const theme = require(module);
+    const str   = Object.prototype.toString;
 
     if (
       typeof theme !==
@@ -88,22 +83,25 @@ export default function resolve (env) {
   }
 
   /**
-   * Try to find the default theme.
+   * Load given theme module.
    *
-   * @return {String} default path theme.
+   * @param {String} env
    */
-  function getDefaultTheme () {
-    try {
-      require.resolve('markdowndoc-theme-default');
-    } catch (err) {
-      logger.error(
-        new errors.MarkdownDocError(
-          'Holy shit, the default theme was not found! Run!'
-        )
-      );
+  function load() {
+    const name  = env.get('intern.theme');
+    let theme = '';
+
+    if (name.indexOf('/') === -1) {
+      theme = getValidModuleName(`markdowndoc-theme-${name}`);
+    } else {
+      theme = path.resolve(process.cwd(), getValidModuleName(name));
     }
 
-    return 'default';
+    env.set('intern.displayTheme', path.relative(process.cwd(), theme));
+
+    env.log(`Given theme ${name} is loaded.`);
+
+    return getValidThemeFunction(theme);
   }
 
   return load(env);

@@ -1,6 +1,6 @@
 'use strict';
 
-var expect      = require('chai').expect
+var expect      = require('chai').expect;
 var assert      = require('chai').assert;
 var utils       = require('../specs/utils');
 var Environment = require('../specs/environment');
@@ -10,13 +10,14 @@ var path        = require('path');
 describe('#environment', function () {
   it('should load look for .markdowndocrc or load default config if no path is set', function () {
     var expected = {
-      'name'        : 'MarkdownDoc',
-      'version'     : '0.0.0',
-      'description' : 'A documentation tool for Markdown.',
-      'debug'       : false,
-      'style'       : 'single',
-      'intern'      : {
-        'file-type': '.md',
+      'name'       : 'markdowndoc',
+      'version'    : '0.0.0',
+      'description': 'A documentation tool for Markdown.',
+      'debug'      : false,
+      'style'      : 'single',
+      'file-type'  : '.md',
+      'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
+      'intern'     : {
         'html'        : false,
         'xhtmlOut'    : false,
         'breaks'      : false,
@@ -24,7 +25,6 @@ describe('#environment', function () {
         'linkify'     : true,
         'typography'  : true,
         'dest'        : 'markdowndoc',
-        'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
         'theme'       : 'default',
         'noUpdateNotifier': true,
         'plugins'     : {
@@ -46,13 +46,14 @@ describe('#environment', function () {
   describe('#load-default-config', function () {
     it('should render the default config', function () {
       var expected = {
-        'name'        : 'MarkdownDoc',
-        'version'     : '0.0.0',
-        'description' : 'A documentation tool for Markdown.',
-        'debug'       : false,
-        'style'       : 'multisite',
-        'intern'      : {
-          'file-type': '.md',
+        'name'       : 'markdowndoc',
+        'version'    : '0.0.0',
+        'description': 'A documentation tool for Markdown.',
+        'debug'      : false,
+        'style'      : 'multisite',
+        'file-type'  : '.md',
+        'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
+        'intern'     : {
           'html'        : false,
           'xhtmlOut'    : false,
           'breaks'      : false,
@@ -60,7 +61,6 @@ describe('#environment', function () {
           'linkify'     : true,
           'typography'  : true,
           'dest'        : 'markdowndoc',
-          'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
           'theme'       : 'default',
           'noUpdateNotifier': true,
           'plugins'     : {
@@ -83,13 +83,14 @@ describe('#environment', function () {
   describe('#package-load', function () {
     it('should render the package config', function () {
       var expected = {
-        'name'       : 'MarkdownDoc',
+        'name'       : 'markdowndoc',
         'version'    : '0.0.0',
         'description': 'A documentation tool for Markdown.',
-        'debug'       : false,
-        'style'       : 'single',
-        'intern'      : {
-          'file-type': '.md',
+        'debug'      : false,
+        'style'      : 'single',
+        'file-type'  : '.md',
+        'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
+        'intern'     : {
           'html'        : true,
           'xhtmlOut'    : false,
           'breaks'      : true,
@@ -97,7 +98,6 @@ describe('#environment', function () {
           'linkify'     : true,
           'typography'  : true,
           'dest'        : 'markdowndoc',
-          'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
           'theme'       : 'default',
           'noUpdateNotifier': true,
           'plugins'     : {
@@ -122,7 +122,7 @@ describe('#environment', function () {
     it('should warn if package file is not found and load CWD package.json', function () {
       var env = new Environment('should/fail.json');
 
-      assert.ok(env.parsedConf.name === 'MarkdownDoc');
+      assert.ok(env.parsedConf.name === 'markdowndoc');
       // assert.notEqual(-1, warnings[0].indexOf('should/fail.json` not found'));
       // assert.notEqual(-1, warnings[1].indexOf('Falling back to `package.json`'));
     });

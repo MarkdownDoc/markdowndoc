@@ -1,44 +1,42 @@
-'use strict';
-
 import fs from 'fs';
 import path from 'path';
 
 import { filter } from './utils';
 
-export function createTree (dir, done, fileNameRegex) {
-  let results     = [];
-  let files       = [];
+export function createTree(dir, done, fileNameRegex) {
+  const results     = [];
+  const files       = [];
 
-  fs.readdir(dir, function (err, list) {
+  fs.readdir(dir, function(err, list) {
     if (err) {
       return done(err);
     }
 
-    list = filter(dir, list, fileNameRegex);
+    const filteredList = filter(dir, list, fileNameRegex);
 
-    let pending = list.length;
+    let pending = filteredList.length;
 
     if (!pending) {
       // Folder
       return done(null, {
         dir: dir,
         files: {},
-        directories: results
+        directories: results,
       });
     }
 
-    list.forEach(function (file) {
-      let filePath = path.resolve(dir, file);
+    filteredList.forEach(function(file) {
+      const filePath = path.resolve(dir, file);
 
-      fs.stat(filePath, function (err, stat) {
+      fs.stat(filePath, function(error, stat) {
         if (stat && stat.isDirectory()) {
-          createTree(filePath, function (err, res) {
+          createTree(filePath, function(treeError, res) {
             // Folder
             if (!--pending) {
               results.push({
                 path: dir,
                 files: files,
-                directories: res
+                directories: res,
               });
 
               done(null, results);
@@ -49,14 +47,14 @@ export function createTree (dir, done, fileNameRegex) {
           files.push({
             fileName: filePath,
             title: '',
-            html: ''
+            html: '',
           });
 
           if (!--pending) {
             results.push({
               path: dir,
               files: files,
-              directories: []
+              directories: [],
             });
 
             done(null, results);

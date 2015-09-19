@@ -1,9 +1,7 @@
-'use strict';
-
 import { is, getFirstMatch } from './utils';
 import * as errors from './errors';
 import Environment from './environment';
-import render from './parser';
+import mdRenderer from 'markdowndoc-markdown-parser';
 import setRuntimeInfos from './platform-infos';
 import resolve from './theme-resolver';
 import {createTree} from './tree';
@@ -24,8 +22,8 @@ export { Environment, errors };
  * @return {Object}
  */
 export function ensureEnvironment(config, onError = e => { throw e; }) {
-  let env = '',
-  modus;
+  let env = '';
+  let modus;
 
   if (config instanceof Environment) {
     env = config;
@@ -48,15 +46,14 @@ export function ensureEnvironment(config, onError = e => { throw e; }) {
   return env;
 }
 
-export function createDataTree (env, done) {
-  let re = /.md\b/;
+export function createDataTree(env, done) {
+  const re = new RegExp(env.get('file-type') + '\\b');
 
   createTree(
     env.get('src'),
-    function (err, res) {
-
-      if (err) {
-        console.error(err);
+    function(treeError, res) {
+      if (treeError) {
+        env.log(new errors.MarkdownDocError(treeError), 'error');
       }
 
       if (typeof done === 'function') {
@@ -67,18 +64,19 @@ export function createDataTree (env, done) {
   );
 }
 
-export function addFileData (env, dirData) {
-  let i, l;
+export function addFileData(env, dirData) {
+  let i;
+  let l;
 
   // loop through files
   l = dirData.files.length;
 
   for (i = 0; i < l; i++) {
-    let html = render(env, dirData.files[i].fileName);
-    let title = getFirstMatch(html, /<h1>(.*)<\/h1>/g);
-    let fileName = path.basename(
+    const html = mdRenderer(env, dirData.files[i].fileName);
+    const title = getFirstMatch(html, /<h1>(.*)<\/h1>/g);
+    const fileName = path.basename(
       dirData.files[i].fileName,
-      env.get('intern.file-type')
+      env.get('file-type')
     );
 
     dirData.files[i].html = html;
@@ -100,26 +98,21 @@ export function addFileData (env, dirData) {
  *
  * @param {Object} env
  */
-export default function markdowndoc (config) {
+export default function markdowndoc(config) {
   const env = ensureEnvironment(config);
 
-  function executeDocs (env) {
-    createDataTree(env, function (data) {
-      data = addFileData(env, data);
+  /**
+   * Warn user on empty documentation.
+   *
+   * @param {Array} data
+   * @param {Object} env
+   */
+  function checkIfDataNotEmpty(data) {
+    const message = `MarkdownDocs could not find anything to document.\n`;
 
-      checkIfDataNotEmpty(data, env);
-
-      env.set('datatree', data);
-
-      try {
-        createEmptyOutputDirectory(env);
-        renderTheme(env);
-        okay(env);
-      } catch (err) {
-        env.emit('error', err);
-        throw err;
-      }
-    });
+    if (!is.object(data)) {
+      env.log(new errors.Warning(message), 'warning');
+    }
   }
 
   /**
@@ -130,13 +123,15 @@ export default function markdowndoc (config) {
    *
    * @param  {Object} env
    */
-  function createEmptyOutputDirectory (env) {
+  function createEmptyOutputDirectory() {
+    const dest = env.get('intern.dest');
+
     fsExtra.emptyDir(
-      env.get('intern.destAbsolute'),
-      function (err) {
+      env.get('destAbsolute'),
+      function(err) {
         if (!err) {
           env.log(
-            `Folder \`${env.get('intern.dest')}\` successfully refreshed.`
+            `Folder \`${dest}\` successfully refreshed.`
           );
         }
       }
@@ -148,10 +143,10 @@ export default function markdowndoc (config) {
    *
    * @return {Promise}
    */
-  function renderTheme (env) {
-    let theme = resolve(env);
-    let displayTheme = env.get('intern.displayTheme') || 'anonymous';
-    let dest = env.get('intern.destAbsolute');
+  function renderTheme() {
+    const theme = resolve(env);
+    const displayTheme = env.get('intern.displayTheme') || 'anonymous';
+    const dest = env.get('destAbsolute');
 
     // Delete internal config, no need for the theme to know about it.
     delete env.parsedConf.intern;
@@ -162,26 +157,31 @@ export default function markdowndoc (config) {
   }
 
   /**
-   * Warn user on empty documentation.
-   *
-   * @param {Array} data
-   * @param {Object} env
-   */
-  function checkIfDataNotEmpty (data, env) {
-    let message = `MarkdownDocs could not find anything to document.\n`;
-
-    if (!is.object(data)) {
-      env.log(new errors.Warning(message), 'warning');
-    }
-  }
-
-  /**
    * Log final success message.
    *
    * @param {Object} env
    */
-  function okay (env) {
+  function okay() {
     env.log('Process over. Everything okay!');
+  }
+
+  function executeDocs() {
+    createDataTree(env, function(data) {
+      const dataTree = addFileData(env, data);
+
+      checkIfDataNotEmpty(dataTree, env);
+
+      env.set('datatree', dataTree);
+
+      try {
+        createEmptyOutputDirectory();
+        renderTheme();
+        okay();
+      } catch (err) {
+        env.emit('error', err);
+        throw err;
+      }
+    });
   }
 
   return executeDocs(env);
