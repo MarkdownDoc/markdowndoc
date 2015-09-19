@@ -1,8 +1,9 @@
 module.exports = {
-  'test' : [
+  'test': [
     'newer:jsonlint:dev',
-    'newer:jscs:dev',
-    'newer:jshint:dev',
+    'jscs:dev',
+    'eslint',
+    'jshint:dev',
     'babel:test',
     'mochacli'
   ],

@@ -1,23 +1,21 @@
-'use strict';
-
 export class MarkdownDocError extends Error {
-  constructor (message) {
+  constructor(message) {
     super(message);
     this.message = message; // rm when native class support.
   }
 
-  get name () {
+  get name() {
     return 'MarkdownDocError';
   }
 }
 
 export class Warning extends MarkdownDocError {
-  constructor (message) {
+  constructor(message) {
     super(message);
     this.message = message; // rm when native class support.
   }
 
-  get name () {
+  get name() {
     return 'Warning';
   }
 }

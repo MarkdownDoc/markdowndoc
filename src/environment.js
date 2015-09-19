@@ -1,5 +1,3 @@
-'use strict';
-
 import path from 'path';
 import loadFile from 'config-file';
 import { is, merge } from './utils';
@@ -7,7 +5,7 @@ import { EventEmitter } from 'events';
 import Logger from 'log';
 import setValue from 'set-value';
 
-let defaults = {
+const defaults = {
   'debug': false,
   'style': 'multisite',
   'file-type': '.md',
@@ -25,9 +23,9 @@ let defaults = {
       'highlight': true,
       'linkscheme': true,
       'responsiveimage': true,
-      'checkbox': true
-    }
-  }
+      'checkbox': true,
+    },
+  },
 };
 
 export default class Environment extends EventEmitter {
@@ -36,7 +34,7 @@ export default class Environment extends EventEmitter {
    * @param {String|Object|Undefined} config
    * @param {String}                  modus
    */
-  constructor (config = undefined, modus = false) {
+  constructor(config = undefined, modus = false) {
     super();
 
     this.modus      = this.getModus(modus);
@@ -49,7 +47,7 @@ export default class Environment extends EventEmitter {
     }
   }
 
-  getModus (modus) {
+  getModus(modus) {
     if (modus === undefined) {
       return 'warning';
     }
@@ -61,9 +59,9 @@ export default class Environment extends EventEmitter {
     return modus;
   }
 
-  parseConfig (config) {
-    let packageDetails     = this.fetchPackageDetails();
-    let packageMarkdownDoc = packageDetails.markdowndoc;
+  parseConfig(config) {
+    const packageDetails     = this.fetchPackageDetails();
+    const packageMarkdownDoc = packageDetails.markdowndoc;
 
     delete packageDetails.markdowndoc;
 
@@ -73,7 +71,7 @@ export default class Environment extends EventEmitter {
     );
 
     if (is.plainObject(config) || is.string(config)) {
-      let fetchedConfig = this.fetchConfig(config);
+      const fetchedConfig = this.fetchConfig(config);
 
       data.intern = this.mergeExternalMarkdownDocConfig(data, fetchedConfig);
     }
@@ -85,8 +83,8 @@ export default class Environment extends EventEmitter {
     return data;
   }
 
-  mergeExternalMarkdownDocConfig (data, fetchedConfig) {
-    let config = (
+  mergeExternalMarkdownDocConfig(data, fetchedConfig) {
+    const config = (
       fetchedConfig.markdowndoc !== undefined &&
       is.plainObject(fetchedConfig.markdowndoc)
     ) ?
@@ -99,7 +97,7 @@ export default class Environment extends EventEmitter {
     return merge(data.intern, config);
   }
 
-  mergePackageMarkdownConfig (data, fetchedPackageConfig) {
+  mergePackageMarkdownConfig(data, fetchedPackageConfig) {
     if (
       fetchedPackageConfig !== undefined &&
       !is.string(fetchedPackageConfig)
@@ -115,9 +113,9 @@ export default class Environment extends EventEmitter {
     return data.intern;
   }
 
-  fetchConfig (config) {
+  fetchConfig(config) {
     if (is.string(config)) {
-      let load = loadFile(config, { parse:'json' });
+      const load = loadFile(config, { parse: 'json' });
 
       if (!load) {
         return {};
@@ -129,15 +127,15 @@ export default class Environment extends EventEmitter {
     return config;
   }
 
-  fetchPackageDetails () {
-    let packageFile = loadFile('package.json');
+  fetchPackageDetails() {
+    const packageFile = loadFile('package.json');
 
     if (packageFile) {
       return {
         name: packageFile.name,
         version: packageFile.version,
         description: packageFile.description,
-        markdowndoc: packageFile.markdowndoc
+        markdowndoc: packageFile.markdowndoc,
       };
     }
 
@@ -145,11 +143,11 @@ export default class Environment extends EventEmitter {
     return {};
   }
 
-  getDefaultConfig () {
-    let markdowndocrc = loadFile('.markdowndocrc', { parse:'json' });
+  getDefaultConfig() {
+    const markdowndocrc = loadFile('.markdowndocrc', { parse: 'json' });
 
     if (markdowndocrc) {
-      let config = {};
+      const config = {};
 
       config.style = markdowndocrc.style;
       delete markdowndocrc.style;
@@ -162,7 +160,7 @@ export default class Environment extends EventEmitter {
     return defaults;
   }
 
-  checkIfDestIsSet (data) {
+  checkIfDestIsSet(data) {
     data.intern.dest  = data.dest ? data.dest : 'markdowndoc';
     data.destAbsolute = path.resolve(process.cwd(), data.intern.dest);
 
@@ -177,17 +175,19 @@ export default class Environment extends EventEmitter {
    *
    * @return {String}
    */
-  get (key) {
+  get(key) {
     if (this.parsedConf[key] !== undefined) {
       return this.parsedConf[key];
     } else if (key.indexOf('.') !== -1) {
-      let parts = key.split('.'),
-      i = 0,
-      part,
-      obj = this.parsedConf;
+      const parts = key.split('.');
+      let i = 0;
+      let part;
+      let obj = this.parsedConf;
 
-      while (obj && (part = parts[i++])) {
-        obj = obj[part];
+      for (;parts[i];) {
+        part = parts[i];
+        obj  = obj[part];
+        i++;
       }
 
       return obj;
@@ -204,7 +204,7 @@ export default class Environment extends EventEmitter {
    * @param {String}  key
    * @param {*}  value
    */
-  set (key, value) {
+  set(key, value) {
     setValue(this.parsedConf, key, value);
   }
 
@@ -216,7 +216,7 @@ export default class Environment extends EventEmitter {
    *
    * @return {Logger}
    */
-  log (message, type = 'info') {
+  log(message, type = 'info') {
     this.logger[type](message);
   }
 }

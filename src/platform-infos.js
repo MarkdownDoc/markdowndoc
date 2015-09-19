@@ -1,10 +1,8 @@
-'use strict';
-
 import path from 'path';
 
 export default function setRuntimeInfos(env) {
-  let prefix = path.resolve(process.execPath, '../../lib');
-  let pkg = path.resolve(prefix, 'node_modules/npm/package.json');
+  const prefix = path.resolve(process.execPath, '../../lib');
+  const pkg = path.resolve(prefix, 'node_modules/npm/package.json');
   let pkgVersion = '';
 
   try {
