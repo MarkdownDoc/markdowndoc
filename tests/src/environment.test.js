@@ -1,6 +1,6 @@
 'use strict';
 
-var expect      = require('chai').expect
+var expect      = require('chai').expect;
 var assert      = require('chai').assert;
 var utils       = require('../specs/utils');
 var Environment = require('../specs/environment');

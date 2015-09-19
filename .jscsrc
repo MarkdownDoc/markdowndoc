@@ -12,9 +12,6 @@
   "disallowSpacesInNamedFunctionExpression": {
     "beforeOpeningRoundBrace": true
   },
-  "requireSpacesInAnonymousFunctionExpression": {
-    "beforeOpeningRoundBrace": true
-  },
 
   // Blocks
   "disallowEmptyBlocks": true,
@@ -62,7 +59,7 @@
   "requireDotNotation": true,
   "requireSpaceAfterLineComment": true,
   "disallowYodaConditions": true,
-  "disallowTrailingComma": true,
+  "disallowTrailingComma": false,
 
   // JSHint formatting
   "requireCapitalizedConstructors": true,

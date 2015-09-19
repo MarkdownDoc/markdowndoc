@@ -1,6 +1,4 @@
-'use strict';
-
-let doc = `
+const doc = `
 Usage:
   markdowndoc - [options]
   markdowndoc --src=... [options]
@@ -21,7 +19,7 @@ Options:
 
 import Environment from './environment';
 import markdowndoc from './markdowndoc';
-import * as errors from './errors';
+// import * as errors from './errors';
 
 import { docopt } from 'docopt';
 import pkg from '../package.json';
@@ -33,8 +31,8 @@ import pkg from '../package.json';
  * value.
  */
 function ensure(env, options, names) {
-  for (let k of Object.keys(names)) {
-    let v = names[k];
+  for (const k of Object.keys(names)) {
+    const v = names[k];
 
     if (options[v]) {
       if (v === '--src') {
@@ -57,14 +55,23 @@ function parseConfig(env, options) {
     'no-update-notifier': '--no-update-notifier',
     style: '--style',
     verbose: '--verbose',
-    debug: '--debug'
+    debug: '--debug',
   });
 }
 
+function getModus(options) {
+  if (options['--verbose']) {
+    return 'verbose';
+  } else if (options['--debug']) {
+    return 'debug';
+  } else if (options['--strict']) {
+    return 'error';
+  }
+}
+
 export default function cli(argv = process.argv.slice(2)) {
-  let options   = docopt(doc, { version: pkg.version, argv: argv });
+  const options   = docopt(doc, { version: pkg.version, argv: argv });
   let newConfig;
-  let modus     = '';
 
   // Check for src and options
   if (!options['-'] && !options['--src'].length) {
@@ -79,15 +86,7 @@ export default function cli(argv = process.argv.slice(2)) {
     newConfig = options['--config'];
   }
 
-  if (options['--verbose']) {
-    modus = 'verbose';
-  } else if (options['--debug']) {
-    modus = 'debug';
-  } else if (options['--strict']) {
-    modus = 'error';
-  }
-
-  let env = new Environment(newConfig, modus);
+  const env = new Environment(newConfig, getModus(options));
 
   // env.on('error', error => {
   //   if (error instanceof errors.Warning) {

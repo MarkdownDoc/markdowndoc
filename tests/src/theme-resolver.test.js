@@ -1,6 +1,6 @@
 'use strict';
 
-var expect      = require('chai').expect
+var expect      = require('chai').expect;
 var assert      = require('chai').assert;
 var resolver    = require('../specs/theme-resolver');
 var Environment = require('../specs/environment');
