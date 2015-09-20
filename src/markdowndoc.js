@@ -1,10 +1,10 @@
 import { is, getFirstMatch } from './utils';
 import * as errors from './errors';
 import Environment from './environment';
-import mdRenderer from 'markdowndoc-markdown-parser';
 import setRuntimeInfos from './platform-infos';
-import resolve from './theme-resolver';
-import {createTree} from './tree';
+import getResolvedTheme from './theme-resolver';
+import getResolvedParser from './parser-resolver';
+import { createTree } from './tree';
 
 import path from 'path';
 import fsExtra from 'fs-extra';
@@ -72,14 +72,17 @@ export function addFileData(env, dirData) {
   l = dirData.files.length;
 
   for (i = 0; i < l; i++) {
-    const html = mdRenderer(env, dirData.files[i].fileName);
+    const html = getResolvedParser(env);
     const title = getFirstMatch(html, /<h1>(.*)<\/h1>/g);
     const fileName = path.basename(
       dirData.files[i].fileName,
       env.get('file-type')
     );
 
-    dirData.files[i].html = html;
+    dirData.files[i].html = html(
+      env.get('intern.plugins'),
+      dirData.files[i].fileName
+    );
     dirData.files[i].title = title !== '' ? title : fileName;
   }
 
@@ -144,7 +147,7 @@ export default function markdowndoc(config) {
    * @return {Promise}
    */
   function renderTheme() {
-    const theme = resolve(env);
+    const theme = getResolvedTheme(env);
     const displayTheme = env.get('intern.displayTheme') || 'anonymous';
     const dest = env.get('destAbsolute');
 

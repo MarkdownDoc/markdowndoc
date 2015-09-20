@@ -32,6 +32,7 @@ var defaults = {
   'debug': false,
   'style': 'multisite',
   'file-type': '.md',
+  'parser': 'markdown',
   'intern': {
     'html': false,
     'xhtmlOut': false,
@@ -203,10 +204,6 @@ var Environment = (function (_EventEmitter) {
       var i = 0;
       var part = undefined;
       var obj = this.parsedConf;
-
-      // while (obj && (part = parts[i++])) {
-      //   obj = obj[part];
-      // }
 
       for (; parts[i];) {
         part = parts[i];

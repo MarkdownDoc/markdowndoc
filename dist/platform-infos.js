@@ -3,13 +3,12 @@
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
 exports.__esModule = true;
-exports['default'] = setRuntimeInfos;
 
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-function setRuntimeInfos(env) {
+exports['default'] = function (env) {
   var prefix = _path2['default'].resolve(process.execPath, '../../lib');
   var pkg = _path2['default'].resolve(prefix, 'node_modules/npm/package.json');
   var pkgVersion = '';
@@ -32,6 +31,6 @@ function setRuntimeInfos(env) {
 
     env.log({ 'env:': env.parsedConf }, 'debug');
   }
-}
+};
 
 module.exports = exports['default'];
