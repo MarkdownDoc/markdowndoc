@@ -38,9 +38,13 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _fsExtra = require('fs-extra');
+var _rmdir = require('rmdir');
 
-var _fsExtra2 = _interopRequireDefault(_fsExtra);
+var _rmdir2 = _interopRequireDefault(_rmdir);
+
+var _mkdirp = require('mkdirp');
+
+var _mkdirp2 = _interopRequireDefault(_mkdirp);
 
 /**
  * Expose lower API blocks.
@@ -156,13 +160,19 @@ function markdowndoc(config) {
    *
    * @param  {Object} env
    */
-  function createEmptyOutputDirectory() {
+  function createEmptyOutputDirectory(cb) {
     var dest = env.get('intern.dest');
 
-    _fsExtra2['default'].emptyDir(env.get('destAbsolute'), function (err) {
-      if (!err) {
-        env.log('Folder `' + dest + '` successfully refreshed.');
-      }
+    _rmdir2['default'](dest, function () {
+      _mkdirp2['default'](dest, function (error) {
+        if (error) {
+          console.error(error);
+        } else {
+          env.log('Folder `' + dest + '` successfully refreshed.');
+
+          cb();
+        }
+      });
     });
   }
 
@@ -190,7 +200,7 @@ function markdowndoc(config) {
    * @param {Object} env
    */
   function okay() {
-    env.log('Process over. Everything okay!');
+    env.log('Process over. Everything okay!', 'info');
   }
 
   function executeDocs() {
@@ -202,8 +212,7 @@ function markdowndoc(config) {
       env.set('datatree', dataTree);
 
       try {
-        createEmptyOutputDirectory();
-        renderTheme();
+        createEmptyOutputDirectory(renderTheme);
         okay();
       } catch (err) {
         env.emit('error', err);

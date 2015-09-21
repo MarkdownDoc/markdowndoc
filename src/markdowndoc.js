@@ -7,7 +7,8 @@ import getResolvedParser from './parser-resolver';
 import { createTree } from './tree';
 
 import path from 'path';
-import fsExtra from 'fs-extra';
+import rmdir from 'rmdir';
+import mkdirp from 'mkdirp';
 
 /**
  * Expose lower API blocks.
@@ -126,19 +127,22 @@ export default function markdowndoc(config) {
    *
    * @param  {Object} env
    */
-  function createEmptyOutputDirectory() {
+  function createEmptyOutputDirectory(cb) {
     const dest = env.get('intern.dest');
 
-    fsExtra.emptyDir(
-      env.get('destAbsolute'),
-      function(err) {
-        if (!err) {
+    rmdir(dest, function() {
+      mkdirp(dest, function(error) {
+        if (error) {
+          console.error(error);
+        } else {
           env.log(
             `Folder \`${dest}\` successfully refreshed.`
           );
+
+          cb();
         }
-      }
-    );
+      });
+    });
   }
 
   /**
@@ -147,9 +151,9 @@ export default function markdowndoc(config) {
    * @return {Promise}
    */
   function renderTheme() {
-    const theme = getResolvedTheme(env);
+    const theme        = getResolvedTheme(env);
     const displayTheme = env.get('intern.displayTheme') || 'anonymous';
-    const dest = env.get('destAbsolute');
+    const dest         = env.get('destAbsolute');
 
     // Delete internal config, no need for the theme to know about it.
     delete env.parsedConf.intern;
@@ -165,7 +169,7 @@ export default function markdowndoc(config) {
    * @param {Object} env
    */
   function okay() {
-    env.log('Process over. Everything okay!');
+    env.log('Process over. Everything okay!', 'info');
   }
 
   function executeDocs() {
@@ -177,8 +181,9 @@ export default function markdowndoc(config) {
       env.set('datatree', dataTree);
 
       try {
-        createEmptyOutputDirectory();
-        renderTheme();
+        createEmptyOutputDirectory(
+          renderTheme
+        );
         okay();
       } catch (err) {
         env.emit('error', err);
