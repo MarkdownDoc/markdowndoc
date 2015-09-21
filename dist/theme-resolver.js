@@ -5,7 +5,6 @@ var _interopRequireDefault = require('babel-runtime/helpers/interop-require-defa
 var _interopRequireWildcard = require('babel-runtime/helpers/interop-require-wildcard')['default'];
 
 exports.__esModule = true;
-exports['default'] = resolve;
 
 var _path = require('path');
 
@@ -23,7 +22,7 @@ var errors = _interopRequireWildcard(_errors);
  * @return {Promise}
  */
 
-function resolve(env) {
+exports['default'] = function (env) {
   var logger = env.logger;
 
   /**
@@ -44,11 +43,11 @@ function resolve(env) {
   /**
    * Check if theme exist, or fallback to default theme.
    *
-   * @param  {String} module - module name.
+   * @param {String} module - module name.
    *
    * @return {String}
    */
-  function getValidModuleName(module) {
+  function getValidedModuleName(module) {
     try {
       require.resolve(module);
     } catch (err) {
@@ -63,11 +62,11 @@ function resolve(env) {
   /**
    * Check if module can use 2 Arguments and is a function.
    *
-   * @param  {String} module - module name.
+   * @param {String} module - module name.
    *
    * @return {Promise}
    */
-  function getValidThemeFunction(module) {
+  function getValidedThemeFunction(module) {
     var theme = require(module);
     var str = Object.prototype.toString;
 
@@ -86,25 +85,27 @@ function resolve(env) {
    * Load given theme module.
    *
    * @param {String} env
+   *
+   * @return {Promise}
    */
   function load() {
     var name = env.get('intern.theme');
     var theme = '';
 
     if (name.indexOf('/') === -1) {
-      theme = getValidModuleName('markdowndoc-theme-' + name);
+      theme = getValidedModuleName('markdowndoc-theme-' + name);
     } else {
-      theme = _path2['default'].resolve(process.cwd(), getValidModuleName(name));
+      theme = _path2['default'].resolve(process.cwd(), getValidedModuleName(name));
     }
 
     env.set('intern.displayTheme', _path2['default'].relative(process.cwd(), theme));
 
     env.log('Given theme ' + name + ' is loaded.');
 
-    return getValidThemeFunction(theme);
+    return getValidedThemeFunction(theme);
   }
 
   return load(env);
-}
+};
 
 module.exports = exports['default'];

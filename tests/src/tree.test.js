@@ -38,9 +38,9 @@ describe('#tree', function () {
     expect(list.length).to.equal(1);
 
     var testdir = function(dir, path, numfiles, numdirs) {
-        expect(dir.path.substring(dir.path.length - path.length)).to.equal(path);
-        expect(dir.files.length).to.equal(numfiles);
-        expect(dir.directories.length).to.equal(numdirs);
+      expect(dir.path.substring(dir.path.length - path.length)).to.equal(path);
+      expect(dir.files.length).to.equal(numfiles);
+      expect(dir.directories.length).to.equal(numdirs);
     };
 
     testdir(list[0], 'fixture', 3, 1);

@@ -1,6 +1,6 @@
 module.exports = {
   'test': [
-    'newer:jsonlint:dev',
+    'jsonlint:dev',
     'jscs:dev',
     'eslint',
     'jshint:dev',
@@ -10,7 +10,7 @@ module.exports = {
   'default': [
     'clean',
     'test',
-    'newer:babel:dist'
+    'babel:dist'
   ],
   'build': [
     'bump',

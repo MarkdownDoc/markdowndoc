@@ -20,10 +20,6 @@ var _environment = require('./environment');
 
 var _environment2 = _interopRequireDefault(_environment);
 
-var _markdowndocMarkdownParser = require('markdowndoc-markdown-parser');
-
-var _markdowndocMarkdownParser2 = _interopRequireDefault(_markdowndocMarkdownParser);
-
 var _platformInfos = require('./platform-infos');
 
 var _platformInfos2 = _interopRequireDefault(_platformInfos);
@@ -31,6 +27,10 @@ var _platformInfos2 = _interopRequireDefault(_platformInfos);
 var _themeResolver = require('./theme-resolver');
 
 var _themeResolver2 = _interopRequireDefault(_themeResolver);
+
+var _parserResolver = require('./parser-resolver');
+
+var _parserResolver2 = _interopRequireDefault(_parserResolver);
 
 var _tree = require('./tree');
 
@@ -107,11 +107,11 @@ function addFileData(env, dirData) {
   l = dirData.files.length;
 
   for (i = 0; i < l; i++) {
-    var html = _markdowndocMarkdownParser2['default'](env, dirData.files[i].fileName);
+    var html = _parserResolver2['default'](env);
     var title = _utils.getFirstMatch(html, /<h1>(.*)<\/h1>/g);
     var fileName = _path2['default'].basename(dirData.files[i].fileName, env.get('file-type'));
 
-    dirData.files[i].html = html;
+    dirData.files[i].html = html(env.get('intern.plugins'), dirData.files[i].fileName);
     dirData.files[i].title = title !== '' ? title : fileName;
   }
 

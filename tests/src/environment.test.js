@@ -1,11 +1,8 @@
 'use strict';
 
-var expect      = require('chai').expect;
 var assert      = require('chai').assert;
-var utils       = require('../specs/utils');
 var Environment = require('../specs/environment');
 var path        = require('path');
-
 
 describe('#environment', function () {
   it('should load look for .markdowndocrc or load default config if no path is set', function () {
@@ -16,6 +13,7 @@ describe('#environment', function () {
       'debug'      : false,
       'style'      : 'single',
       'file-type'  : '.md',
+      'parser': 'markdown',
       'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
       'intern'     : {
         'html'        : false,
@@ -52,6 +50,7 @@ describe('#environment', function () {
         'debug'      : false,
         'style'      : 'multisite',
         'file-type'  : '.md',
+        'parser': 'markdown',
         'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
         'intern'     : {
           'html'        : false,
@@ -89,6 +88,7 @@ describe('#environment', function () {
         'debug'      : false,
         'style'      : 'single',
         'file-type'  : '.md',
+        'parser': 'markdown',
         'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
         'intern'     : {
           'html'        : true,
@@ -135,7 +135,7 @@ describe('#environment', function () {
       env.set('test-key', 'test');
       assert.equal(env.get('test-key'), 'test');
 
-      env.set('test.key', 'test')
+      env.set('test.key', 'test');
       assert.equal(env.get('test.key'), 'test');
 
       assert.equal(env.get('intern.html'), false);

@@ -5,7 +5,7 @@ var assert      = require('chai').assert;
 var resolver    = require('../specs/theme-resolver');
 var Environment = require('../specs/environment');
 
-describe('#resolver', function () {
+describe('#theme-resolver', function () {
   var env;
 
   beforeEach(function () {
