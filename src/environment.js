@@ -9,6 +9,7 @@ const defaults = {
   'debug': false,
   'style': 'multisite',
   'file-type': '.md',
+  'parser': 'markdown',
   'intern': {
     'html': false,
     'xhtmlOut': false,

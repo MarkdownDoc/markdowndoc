@@ -17,10 +17,11 @@ module.exports = {
       'tests/specs/errors.js': 'src/errors.js',
       'tests/specs/markdowndoc.js': 'src/markdowndoc.js',
       'tests/specs/notifier.js': 'src/notifier.js',
-      'tests/specs/utils.js': 'src/utils.js',
-      'tests/specs/theme-resolver.js': 'src/theme-resolver.js',
+      'tests/specs/parser-resolver.js': 'src/parser-resolver.js',
       'tests/specs/platform-infos.js': 'src/platform-infos.js',
-      'tests/specs/tree.js': 'src/tree.js'
+      'tests/specs/theme-resolver.js': 'src/theme-resolver.js',
+      'tests/specs/tree.js': 'src/tree.js',
+      'tests/specs/utils.js': 'src/utils.js',
     }
   },
   dist: {
@@ -33,10 +34,11 @@ module.exports = {
       'dist/errors.js': 'src/errors.js',
       'dist/markdowndoc.js': 'src/markdowndoc.js',
       'dist/notifier.js': 'src/notifier.js',
-      'dist/utils.js': 'src/utils.js',
-      'dist/theme-resolver.js': 'src/theme-resolver.js',
+      'dist/parser-resolver.js': 'src/parser-resolver.js',
       'dist/platform-infos.js': 'src/platform-infos.js',
-      'dist/tree.js': 'src/tree.js'
+      'dist/theme-resolver.js': 'src/theme-resolver.js',
+      'dist/tree.js': 'src/tree.js',
+      'dist/utils.js': 'src/utils.js',
     }
   }
 };

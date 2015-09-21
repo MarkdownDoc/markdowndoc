@@ -1,6 +1,6 @@
 import path from 'path';
 
-export default function setRuntimeInfos(env) {
+export default function(env) {
   const prefix = path.resolve(process.execPath, '../../lib');
   const pkg = path.resolve(prefix, 'node_modules/npm/package.json');
   let pkgVersion = '';
