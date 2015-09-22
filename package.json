@@ -1,6 +1,6 @@
 {
   "name": "markdowndoc",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A documentation tool for Markdown.",
   "author": {
     "name": "Daniel Bannert",
