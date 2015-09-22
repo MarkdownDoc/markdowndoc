@@ -142,7 +142,7 @@ export default function markdowndoc(config) {
     rmdir(dest, function() {
       mkdirp(dest, function(error) {
         if (error) {
-          console.error(error);
+          env.log(error, 'error');
         } else {
           env.log(
             `Folder \`${dest}\` successfully refreshed.`
