@@ -175,7 +175,7 @@ function markdowndoc(config) {
     _rmdir2['default'](dest, function () {
       _mkdirp2['default'](dest, function (error) {
         if (error) {
-          console.error(error);
+          env.log(error, 'error');
         } else {
           env.log('Folder `' + dest + '` successfully refreshed.');
 
