@@ -153,6 +153,15 @@ function markdowndoc(config) {
   }
 
   /**
+   * Log final success message.
+   *
+   * @param {Object} env
+   */
+  function okay() {
+    env.log('Process over. Everything okay!', 'info');
+  }
+
+  /**
    * Ensures that a directory is empty.
    * If the directory does not exist, it is created.
    * The directory itself is not deleted.
@@ -171,6 +180,7 @@ function markdowndoc(config) {
           env.log('Folder `' + dest + '` successfully refreshed.');
 
           cb();
+          okay();
         }
       });
     });
@@ -194,15 +204,6 @@ function markdowndoc(config) {
     env.log('Theme `' + displayTheme + '` successfully rendered.');
   }
 
-  /**
-   * Log final success message.
-   *
-   * @param {Object} env
-   */
-  function okay() {
-    env.log('Process over. Everything okay!', 'info');
-  }
-
   function executeDocs() {
     createDataTree(env, function (data) {
       var dataTree = addFileData(env, data);
@@ -213,7 +214,6 @@ function markdowndoc(config) {
 
       try {
         createEmptyOutputDirectory(renderTheme);
-        okay();
       } catch (err) {
         env.emit('error', err);
         throw err;

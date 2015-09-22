@@ -155,6 +155,7 @@ var Environment = (function (_EventEmitter) {
         name: packageFile.name,
         version: packageFile.version,
         description: packageFile.description,
+        license: packageFile.license,
         markdowndoc: packageFile.markdowndoc
       };
     }

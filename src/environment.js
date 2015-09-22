@@ -136,6 +136,7 @@ export default class Environment extends EventEmitter {
         name: packageFile.name,
         version: packageFile.version,
         description: packageFile.description,
+        license: packageFile.license,
         markdowndoc: packageFile.markdowndoc,
       };
     }
