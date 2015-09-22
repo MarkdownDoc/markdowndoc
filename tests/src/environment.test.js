@@ -8,7 +8,7 @@ describe('#environment', function () {
   it('should load look for .markdowndocrc or load default config if no path is set', function () {
     var expected = {
       'name'       : 'markdowndoc',
-      'version'    : '0.0.1',
+      'version'    : '0.0.2',
       'description': 'A documentation tool for Markdown.',
       'debug'      : false,
       'style'      : 'single',
@@ -46,7 +46,7 @@ describe('#environment', function () {
     it('should render the default config', function () {
       var expected = {
         'name'       : 'markdowndoc',
-        'version'    : '0.0.1',
+        'version'    : '0.0.2',
         'description': 'A documentation tool for Markdown.',
         'debug'      : false,
         'style'      : 'multisite',
@@ -85,7 +85,7 @@ describe('#environment', function () {
     it('should render the package config', function () {
       var expected = {
         'name'       : 'markdowndoc',
-        'version'    : '0.0.1',
+        'version'    : '0.0.2',
         'description': 'A documentation tool for Markdown.',
         'debug'      : false,
         'style'      : 'single',
