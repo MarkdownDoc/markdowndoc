@@ -11,9 +11,6 @@ before_install:
   - npm i npm@latest -g
   - npm install -g grunt-cli babel
 
-before_script:
-  - npm install
-
 script:
   - grunt test -v --stack -d
 
