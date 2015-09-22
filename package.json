@@ -67,7 +67,7 @@
     "fs-extra": "^0.24.0",
     "log": "^1.4.0",
     "markdowndoc-markdown-parser": "^0.1.1",
-    "markdowndoc-theme-default": "^0.1.3",
+    "markdowndoc-theme-default": "^0.2.0",
     "mkdirp": "^0.5.1",
     "rmdir": "^1.1.0",
     "set-value": "^0.2.0",
