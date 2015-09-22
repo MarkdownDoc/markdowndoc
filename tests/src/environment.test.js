@@ -13,7 +13,8 @@ describe('#environment', function () {
       'debug'      : false,
       'style'      : 'single',
       'file-type'  : '.md',
-      'parser': 'markdown',
+      'license'    : 'MIT',
+      'parser'     : 'markdown',
       'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
       'intern'     : {
         'html'        : false,
@@ -50,7 +51,8 @@ describe('#environment', function () {
         'debug'      : false,
         'style'      : 'multisite',
         'file-type'  : '.md',
-        'parser': 'markdown',
+        'parser'     : 'markdown',
+        'license'    : 'MIT',
         'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
         'intern'     : {
           'html'        : false,
@@ -88,7 +90,8 @@ describe('#environment', function () {
         'debug'      : false,
         'style'      : 'single',
         'file-type'  : '.md',
-        'parser': 'markdown',
+        'parser'     : 'markdown',
+        'license'    : 'MIT',
         'destAbsolute': path.resolve(process.cwd(), 'markdowndoc'),
         'intern'     : {
           'html'        : true,

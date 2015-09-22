@@ -8,10 +8,8 @@ node_js:
   - "4"
 
 before_install:
-  - npm install -g grunt-cli
-
-before_script:
-  - npm install
+  - npm i npm@latest -g
+  - npm install -g grunt-cli babel
 
 script:
   - grunt test -v --stack -d

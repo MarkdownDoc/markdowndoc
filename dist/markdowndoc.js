@@ -38,9 +38,13 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _fsExtra = require('fs-extra');
+var _rmdir = require('rmdir');
 
-var _fsExtra2 = _interopRequireDefault(_fsExtra);
+var _rmdir2 = _interopRequireDefault(_rmdir);
+
+var _mkdirp = require('mkdirp');
+
+var _mkdirp2 = _interopRequireDefault(_mkdirp);
 
 /**
  * Expose lower API blocks.
@@ -149,6 +153,15 @@ function markdowndoc(config) {
   }
 
   /**
+   * Log final success message.
+   *
+   * @param {Object} env
+   */
+  function okay() {
+    env.log('Process over. Everything okay!', 'info');
+  }
+
+  /**
    * Ensures that a directory is empty.
    * If the directory does not exist, it is created.
    * The directory itself is not deleted.
@@ -156,13 +169,20 @@ function markdowndoc(config) {
    *
    * @param  {Object} env
    */
-  function createEmptyOutputDirectory() {
+  function createEmptyOutputDirectory(cb) {
     var dest = env.get('intern.dest');
 
-    _fsExtra2['default'].emptyDir(env.get('destAbsolute'), function (err) {
-      if (!err) {
-        env.log('Folder `' + dest + '` successfully refreshed.');
-      }
+    _rmdir2['default'](dest, function () {
+      _mkdirp2['default'](dest, function (error) {
+        if (error) {
+          env.log(error, 'error');
+        } else {
+          env.log('Folder `' + dest + '` successfully refreshed.');
+
+          cb();
+          okay();
+        }
+      });
     });
   }
 
@@ -184,15 +204,6 @@ function markdowndoc(config) {
     env.log('Theme `' + displayTheme + '` successfully rendered.');
   }
 
-  /**
-   * Log final success message.
-   *
-   * @param {Object} env
-   */
-  function okay() {
-    env.log('Process over. Everything okay!');
-  }
-
   function executeDocs() {
     createDataTree(env, function (data) {
       var dataTree = addFileData(env, data);
@@ -202,9 +213,7 @@ function markdowndoc(config) {
       env.set('datatree', dataTree);
 
       try {
-        createEmptyOutputDirectory();
-        renderTheme();
-        okay();
+        createEmptyOutputDirectory(renderTheme);
       } catch (err) {
         env.emit('error', err);
         throw err;
