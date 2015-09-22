@@ -6,14 +6,20 @@
     "name": "Daniel Bannert",
     "email": "d.bannert@anolilab.de"
   },
+  "contributors": [
+    {
+      "name": "Timothy Groves",
+      "url": "http://www.greatwhiteark.com",
+      "email": "groves@greatwhiteark.com"
+    },
+  ],
   "homepage": "https://github.com/MarkdownDoc/markdowndocs",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/MarkdownDoc/markdowndocs.git"
   },
   "directories": {
-    "test": "tests"
+    "tests": "tests"
   },
   "scripts": {
     "test": "grunt test -v --stack -d"
@@ -24,6 +30,17 @@
   "license": "MIT",
   "engines": {
     "node": ">= 0.10.0"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "index.js",
+    "CHANGELOG.md",
+    "LICENCE.md",
+    "README.md"
+  ],
+  "bin": {
+    "markdowndoc": "bin/markdowndoc"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -49,7 +66,6 @@
   },
   "keywords": [
     "grunt",
-    "bower",
     "bin",
     "front-end",
     "development",
@@ -57,7 +73,11 @@
     "build",
     "generator",
     "generate",
-    "tool"
+    "tool",
+    "doc",
+    "documentation",
+    "comments",
+    "theme"
   ],
   "dependencies": {
     "babel-runtime": "^5.8.20",
