@@ -73,18 +73,23 @@ export function addFileData(env, dirData) {
   l = dirData.files.length;
 
   for (i = 0; i < l; i++) {
-    const html = getResolvedParser(env);
-    const title = getFirstMatch(html, /<h1>(.*)<\/h1>/g);
+    let html = getResolvedParser(env);
+
     const fileName = path.basename(
       dirData.files[i].fileName,
       env.get('file-type')
     );
 
-    dirData.files[i].html = html(
+    html = html(
       env.get('intern.plugins'),
       dirData.files[i].fileName
     );
-    dirData.files[i].title = title !== '' ? title : fileName;
+
+    dirData.files[i].html = html;
+
+    const title = getFirstMatch(html, /<h1>(.*)<\/h1>/g);
+
+    dirData.files[i].title = title.length !== 0 ? title : fileName;
   }
 
   // loop through directories

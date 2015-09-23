@@ -1,6 +1,6 @@
 {
   "name": "markdowndoc",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A documentation tool for Markdown.",
   "author": {
     "name": "Daniel Bannert",
@@ -87,7 +87,7 @@
     "fs-extra": "^0.24.0",
     "log": "^1.4.0",
     "markdowndoc-markdown-parser": "^0.1.1",
-    "markdowndoc-theme-default": "^0.2.0",
+    "markdowndoc-theme-default": "^0.3.0",
     "mkdirp": "^0.5.1",
     "rmdir": "^1.1.0",
     "set-value": "^0.2.0",
