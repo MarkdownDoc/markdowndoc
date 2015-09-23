@@ -19,7 +19,7 @@ Options:
 
 import Environment from './environment';
 import markdowndoc from './markdowndoc';
-// import * as errors from './errors';
+import * as errors from './errors';
 
 import { docopt } from 'docopt';
 import pkg from '../package.json';
@@ -88,13 +88,15 @@ export default function cli(argv = process.argv.slice(2)) {
 
   const env = new Environment(newConfig, getModus(options));
 
-  // env.on('error', error => {
-  //   if (error instanceof errors.Warning) {
-  //     process.exit(2);
-  //   }
+  if (!options['--debug']) {
+    env.on('error', error => {
+      if (error instanceof errors.Warning) {
+        process.exit(2);
+      }
 
-  //   process.exit(1);
-  // });
+      process.exit(1);
+    });
+  }
 
   parseConfig(env, options);
 
@@ -103,5 +105,5 @@ export default function cli(argv = process.argv.slice(2)) {
     require('./notifier')(pkg, env.logger);
   }
 
-  return markdowndoc(env);
+  markdowndoc(env);
 }

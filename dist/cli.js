@@ -6,6 +6,8 @@ var _getIterator = require('babel-runtime/core-js/get-iterator')['default'];
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
+var _interopRequireWildcard = require('babel-runtime/helpers/interop-require-wildcard')['default'];
+
 exports.__esModule = true;
 exports['default'] = cli;
 
@@ -17,7 +19,9 @@ var _markdowndoc = require('./markdowndoc');
 
 var _markdowndoc2 = _interopRequireDefault(_markdowndoc);
 
-// import * as errors from './errors';
+var _errors = require('./errors');
+
+var errors = _interopRequireWildcard(_errors);
 
 var _docopt = require('docopt');
 
@@ -103,13 +107,15 @@ function cli() {
 
   var env = new _environment2['default'](newConfig, getModus(options));
 
-  // env.on('error', error => {
-  //   if (error instanceof errors.Warning) {
-  //     process.exit(2);
-  //   }
+  if (!options['--debug']) {
+    env.on('error', function (error) {
+      if (error instanceof errors.Warning) {
+        process.exit(2);
+      }
 
-  //   process.exit(1);
-  // });
+      process.exit(1);
+    });
+  }
 
   parseConfig(env, options);
 
@@ -118,7 +124,7 @@ function cli() {
     require('./notifier')(_packageJson2['default'], env.logger);
   }
 
-  return _markdowndoc2['default'](env);
+  _markdowndoc2['default'](env);
 }
 
 module.exports = exports['default'];
