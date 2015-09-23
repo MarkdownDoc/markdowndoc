@@ -112,11 +112,16 @@ function addFileData(env, dirData) {
 
   for (i = 0; i < l; i++) {
     var html = _parserResolver2['default'](env);
-    var title = _utils.getFirstMatch(html, /<h1>(.*)<\/h1>/g);
+
     var fileName = _path2['default'].basename(dirData.files[i].fileName, env.get('file-type'));
 
-    dirData.files[i].html = html(env.get('intern.plugins'), dirData.files[i].fileName);
-    dirData.files[i].title = title !== '' ? title : fileName;
+    html = html(env.get('intern.plugins'), dirData.files[i].fileName);
+
+    dirData.files[i].html = html;
+
+    var title = _utils.getFirstMatch(html, /<h1>(.*)<\/h1>/g);
+
+    dirData.files[i].title = title.length !== 0 ? title : fileName;
   }
 
   // loop through directories

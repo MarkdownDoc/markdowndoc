@@ -57,9 +57,7 @@ function createTree(dir, done, fileNameRegex) {
         } else {
           // File
           files.push({
-            fileName: filePath,
-            title: '',
-            html: ''
+            fileName: filePath
           });
 
           if (! --pending) {

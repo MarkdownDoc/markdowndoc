@@ -46,8 +46,6 @@ export function createTree(dir, done, fileNameRegex) {
           // File
           files.push({
             fileName: filePath,
-            title: '',
-            html: '',
           });
 
           if (!--pending) {
