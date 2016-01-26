@@ -18,7 +18,7 @@ export default function notify(pkg, logger) {
     return;
   }
 
-  const latest  = chalk.yellow(notifier.update.latest);
+  const latest = chalk.yellow(notifier.update.latest);
   const current = chalk.grey(`(current: ${notifier.update.current})`);
   const command = chalk.blue(`npm update -g ${pkg.name}`);
 

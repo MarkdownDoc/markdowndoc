@@ -42,12 +42,9 @@ export default function(env) {
    */
   function getValidedParserFunction(module) {
     const parser = module !== '' ? require(module) : '';
-    const str    = Object.prototype.toString;
+    const str = Object.prototype.toString;
 
-    if (
-      typeof parser !==
-      'function'
-    ) {
+    if (typeof parser !== 'function') {
       logger.error(new errors.Warning(
         `Given parser is ${str(parser)}, expected ${str(str)}.`
       ));
@@ -74,7 +71,7 @@ export default function(env) {
    * @return {function | null}
    */
   function load() {
-    const name  = env.get('parser');
+    const name = env.get('parser');
     let parser = '';
 
     if (name.indexOf('/') === -1) {
